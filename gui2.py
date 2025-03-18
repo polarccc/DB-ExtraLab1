@@ -288,6 +288,7 @@ class Query(QWidget):
         label4 = QLabel(self.tr("分组："))
         label5 = QLabel(self.tr("HAVING："))
         button = QPushButton(self.tr("执行"))
+        label7 = QLabel(self.tr("生成SQL："))
         label6 = QLabel(self.tr("执行结果："))
 
         self.tableEdit = QLineEdit()
@@ -295,6 +296,7 @@ class Query(QWidget):
         self.limitEdit = QLineEdit()
         self.groupEdit = QLineEdit()
         self.resultEdit = QTextEdit()
+        self.sqlEdit = QTextEdit()
         self.havingEdit = QLineEdit()
 
 
@@ -310,8 +312,10 @@ class Query(QWidget):
         layout.addWidget(label5, 4, 0)
         layout.addWidget(self.havingEdit, 4, 1)
         layout.addWidget(button, 5, 0)
-        layout.addWidget(label6, 6, 0)
-        layout.addWidget(self.resultEdit, 6, 1)
+        layout.addWidget(label6, 7, 0)
+        layout.addWidget(self.resultEdit, 7, 1)
+        layout.addWidget(label7, 6, 0)
+        layout.addWidget(self.sqlEdit, 6, 1)
 
         button.clicked.connect(self.execute)
 
@@ -347,6 +351,7 @@ class Query(QWidget):
                 result += '\n'
 
             if len(result) > 0:
+                self.sqlEdit.setText(query)
                 self.resultEdit.setText(result)
             else:
                 self.resultEdit.setText("无法执行\"" + str(query) + "\"")
