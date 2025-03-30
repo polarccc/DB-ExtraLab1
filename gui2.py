@@ -50,7 +50,7 @@ class StockDialog(QDialog):
                 background-color: #45a049;
             }
             QLabel {
-                font-size: 14px;
+                font-size: 16px;
                 color: #333;
             }
             QLineEdit, QComboBox, QTextEdit {
@@ -71,7 +71,7 @@ class StockDialog(QDialog):
 
         listWidget = QListWidget(mainSplitter)
         listWidget.setFont(QFont("Arial", 12))
-        listWidget.insertItem(0, self.tr("ER-Diagram"))
+        # listWidget.insertItem(0, self.tr("ER-Diagram"))
         listWidget.insertItem(1, self.tr("View"))
         listWidget.insertItem(2, self.tr("Insert"))
         listWidget.insertItem(3, self.tr("Delete"))
@@ -80,13 +80,13 @@ class StockDialog(QDialog):
         frame = QFrame(mainSplitter)
         stack = QStackedWidget()
         stack.setFrameStyle(QFrame.Panel | QFrame.Raised)
-
-        show_ER = ShowER()
+        
+        # show_ER = ShowER()
         view = View()
         insert = Insert()
         delete = Delete()
         query = Query()
-        stack.addWidget(show_ER)
+        # stack.addWidget(show_ER)
         stack.addWidget(view)
         stack.addWidget(insert)
         stack.addWidget(delete)
@@ -110,20 +110,25 @@ class StockDialog(QDialog):
 
         layout = QHBoxLayout(self)
         layout.addWidget(mainSplitter)
+
+        font = QFont("Arial",14)  # 设置字体大小为 14
+        app.setFont(font)
+        
+
         self.setLayout(layout)
 
 
-class ShowER(QWidget):
-    def __init__(self, parent=None):
-        super(ShowER, self).__init__(parent)
-        pixmap = QPixmap("./E-R图.png")
-        self.label = QLabel(self)
-        self.label.setPixmap(pixmap)
-        layout = QGridLayout(self)
-        layout.addWidget(self.label, 0, 0)
+# class ShowER(QWidget):
+#     def __init__(self, parent=None):
+#         super(ShowER, self).__init__(parent)
+#         pixmap = QPixmap("./E-R图.png")
+#         self.label = QLabel(self)
+#         self.label.setPixmap(pixmap)
+#         layout = QGridLayout(self)
+#         layout.addWidget(self.label, 0, 0)
 
-    def execute(self):
-        print("您已按下执行按钮。")
+#     def execute(self):
+#         print("您已按下执行按钮。")
 
 
 class View(QWidget):
@@ -131,10 +136,14 @@ class View(QWidget):
         super(View, self).__init__(parent)
 
         label1 = QLabel(self.tr("视图名："))
+        label1.setStyleSheet("font-size: 24px;")
         label2 = QLabel(self.tr("要查询属性："))
+        label2.setStyleSheet("font-size: 24px;")
         label3 = QLabel(self.tr("限制："))
+        label3.setStyleSheet("font-size: 24px;")
         button = QPushButton(self.tr("执行"))
         label4 = QLabel(self.tr("执行结果："))
+        label4.setStyleSheet("font-size: 24px;")
 
         self.viewComboBox = QComboBox()
         self.attrEdit = QLineEdit()
@@ -196,9 +205,12 @@ class Insert(QWidget):
         super(Insert, self).__init__(parent)
 
         label1 = QLabel(self.tr("表名："))
+        label1.setStyleSheet("font-size: 24px;")
         label2 = QLabel(self.tr("值："))
+        label2.setStyleSheet("font-size: 24px;")
         button = QPushButton(self.tr("执行"))
         label3 = QLabel(self.tr("执行结果："))
+        label3.setStyleSheet("font-size: 24px;")
 
         self.tableEdit = QLineEdit()
         self.attrEdit = QLineEdit()
@@ -235,7 +247,9 @@ class Delete(QWidget):
         super(Delete, self).__init__(parent)
 
         label1 = QLabel(self.tr("表名："))
+        label1.setStyleSheet("font-size: 24px;")
         label3 = QLabel(self.tr("限制："))
+        label3.setStyleSheet("font-size: 24px;")
         button = QPushButton(self.tr("执行"))
         label4 = QLabel(self.tr("执行结果："))
 
@@ -282,23 +296,52 @@ class Query(QWidget):
     def __init__(self, parent=None):
         super(Query, self).__init__(parent)
 
+        font = QFont("Arial", 12)  # 设置统一字体大小
+
         label1 = QLabel(self.tr("表名："))
+        label1.setStyleSheet("font-size: 24px;")
+
         label2 = QLabel(self.tr("要查询属性值："))
+        label2.setStyleSheet("font-size: 24px;")
+
         label3 = QLabel(self.tr("限制："))
+        label3.setStyleSheet("font-size: 24px;")
+
         label4 = QLabel(self.tr("分组："))
+        label4.setStyleSheet("font-size: 24px;")
+
         label5 = QLabel(self.tr("HAVING："))
-        button = QPushButton(self.tr("执行"))
+        label5.setStyleSheet("font-size: 24px;")
+
         label7 = QLabel(self.tr("生成SQL："))
+        label7.setStyleSheet("font-size: 24px;")
+
         label6 = QLabel(self.tr("执行结果："))
+        label6.setStyleSheet("font-size: 24px;")
+
+        button = QPushButton(self.tr("执行"))
+        button.setFont(font)
 
         self.tableEdit = QLineEdit()
-        self.attrEdit = QLineEdit()
-        self.limitEdit = QLineEdit()
-        self.groupEdit = QLineEdit()
-        self.resultEdit = QTextEdit()
-        self.sqlEdit = QTextEdit()
-        self.havingEdit = QLineEdit()
+        self.tableEdit.setFont(font)
 
+        self.attrEdit = QLineEdit()
+        self.attrEdit.setFont(font)
+
+        self.limitEdit = QLineEdit()
+        self.limitEdit.setFont(font)
+
+        self.groupEdit = QLineEdit()
+        self.groupEdit.setFont(font)
+
+        self.resultEdit = QTextEdit()
+        self.resultEdit.setFont(font)
+
+        self.sqlEdit = QTextEdit()
+        self.sqlEdit.setFont(font)
+
+        self.havingEdit = QLineEdit()
+        self.havingEdit.setFont(font)
 
         layout = QGridLayout(self)
         layout.addWidget(label1, 1, 0)
@@ -318,6 +361,7 @@ class Query(QWidget):
         layout.addWidget(self.sqlEdit, 6, 1)
 
         button.clicked.connect(self.execute)
+
 
     def execute(self):
         table = self.tableEdit.text()
