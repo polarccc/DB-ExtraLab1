@@ -10,7 +10,7 @@ conn = pymysql.connect(
     port=3306,
     user="root",
     passwd="root",
-    db="school_management_system",
+    db="school_management_system1",
     charset='utf8'
 )
 
@@ -71,22 +71,25 @@ class StockDialog(QDialog):
 
         listWidget = QListWidget(mainSplitter)
         listWidget.setFont(QFont("Arial", 12))
-        # listWidget.insertItem(0, self.tr("ER-Diagram"))
-        listWidget.insertItem(1, self.tr("View"))
-        listWidget.insertItem(2, self.tr("Insert"))
-        listWidget.insertItem(3, self.tr("Delete"))
-        listWidget.insertItem(4, self.tr("Query"))
+        listWidget.insertItem(0, self.tr("ER-Diagram"))
+        listWidget.insertItem(1, self.tr("IDEF1X"))
+        listWidget.insertItem(2, self.tr("View"))
+        listWidget.insertItem(3, self.tr("Insert"))
+        listWidget.insertItem(4, self.tr("Delete"))
+        listWidget.insertItem(5, self.tr("Query"))
 
         frame = QFrame(mainSplitter)
         stack = QStackedWidget()
         stack.setFrameStyle(QFrame.Panel | QFrame.Raised)
         
-        # show_ER = ShowER()
+        show_ER = ShowER()
+        show_IDEF1X = ShowIDEF1X()
         view = View()
         insert = Insert()
         delete = Delete()
         query = Query()
-        # stack.addWidget(show_ER)
+        stack.addWidget(show_ER)
+        stack.addWidget(show_IDEF1X)
         stack.addWidget(view)
         stack.addWidget(insert)
         stack.addWidget(delete)
@@ -117,18 +120,30 @@ class StockDialog(QDialog):
 
         self.setLayout(layout)
 
+class ShowIDEF1X(QWidget):
+    def __init__(self, parent=None):
+        super(ShowIDEF1X, self).__init__(parent)
+        pixmap = QPixmap("./Diagram IDEFIX.jpg")
+        self.label = QLabel(self)
+        self.label.setPixmap(pixmap)
+        layout = QGridLayout(self)
+        layout.addWidget(self.label, 0, 0)
 
-# class ShowER(QWidget):
-#     def __init__(self, parent=None):
-#         super(ShowER, self).__init__(parent)
-#         pixmap = QPixmap("./E-R图.png")
-#         self.label = QLabel(self)
-#         self.label.setPixmap(pixmap)
-#         layout = QGridLayout(self)
-#         layout.addWidget(self.label, 0, 0)
+    def execute(self):
+        print("您已按下执行按钮。")
 
-#     def execute(self):
-#         print("您已按下执行按钮。")
+
+class ShowER(QWidget):
+    def __init__(self, parent=None):
+        super(ShowER, self).__init__(parent)
+        pixmap = QPixmap("./Diagram 1.jpg")
+        self.label = QLabel(self)
+        self.label.setPixmap(pixmap)
+        layout = QGridLayout(self)
+        layout.addWidget(self.label, 0, 0)
+
+    def execute(self):
+        print("您已按下执行按钮。")
 
 
 class View(QWidget):

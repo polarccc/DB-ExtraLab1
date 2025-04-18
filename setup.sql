@@ -1,8 +1,8 @@
 -- change coding mode
 
 -- Create database
-CREATE DATABASE school_management_system;
-USE school_management_system;
+CREATE DATABASE school_management_system1;
+USE school_management_system1;
 
 -- Create course table
 CREATE TABLE course (
@@ -11,7 +11,7 @@ CREATE TABLE course (
     credits INT NOT NULL,
     PRIMARY KEY (course_ID)
 );
-LOAD DATA LOCAL INFILE "E:\\HIT-courses-main\\Database system\\lab2\\data\\class.txt" INTO TABLE course;
+LOAD DATA LOCAL INFILE "E:\\HIT-courses-main\\Database system\\lab2\\data\\course.txt" INTO TABLE course;
 
 
 -- Create teacher table

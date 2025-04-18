@@ -1,15 +1,19 @@
-use school_management_system;
--- 创建学生成绩视图(学号，学生姓名，课程名字，成绩)
-create view S_course_view
-as
-select S_course.Student_ID,student.Student_NAME,course.course_name,S_course.grade
-from S_course,student,course
-where S_course.Student_ID=student.Student_ID and S_course.course_ID=course.course_ID
-group by S_course.course_ID,S_course.Student_ID,grade
-order by S_course.course_ID ASC,grade DESC;
+use school_management_system1;
+-- 创建学生成绩视图
+create view S_course_view as
+select 
+    S_course.Student_ID,student.Student_NAME,course.course_name,S_course.grade
+from 
+    S_course,student,course
+where 
+    S_course.Student_ID=student.Student_ID and S_course.course_ID=course.course_ID
+group by 
+    S_course.course_ID,S_course.Student_ID,grade
+order by 
+    S_course.course_ID ASC,grade DESC;
 
 
--- 学生的基本信息视图(学号，学生，年龄，班级，系，辅导员，学生联系方式):
+-- 学生的基本信息视图
 CREATE VIEW S_basic_info_view AS
 SELECT
     Student_ID,
@@ -38,7 +42,7 @@ ORDER BY
     Student_ID ASC;
 
 
--- 教师的基本信息视图（教师职工号，姓名，讲授课程，职称，研究方向，所属实验室，联系方式）:
+-- 教师的基本信息视图
 CREATE VIEW t_basic_info_view AS
 SELECT
     teacher_ID,
@@ -66,7 +70,7 @@ ORDER BY
     laboratory_NAME ASC,
     ResearchDirection ASC;
 
--- 系的基本信息视图（系标识号，系名，系主任，系主任联系方式）
+-- 系的基本信息视图
 CREATE VIEW D_basic_info_view AS
 SELECT
     Department_ID,

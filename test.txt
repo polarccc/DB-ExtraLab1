@@ -1,0 +1,27 @@
+// 索引
+mysql -u root -p
+use school_management_system1
+SHOW INDEX FROM student;
+
+// 连接查询
+s.Student_ID,s.Student_NAME,COUNT(s_course.course_ID) AS CourseCount
+student s natural left outer join s_class natural left outer join s_course
+s_class.Class_ID='20210101'
+s.Student_ID,s.Student_NAME
+
+// 嵌套查询
+s.Student_ID, s.Student_NAME
+student s natural left outer join s_class
+class_ID IN (SELECT class_ID FROM student_mentor WHERE Employee_name = 'Kuoka')
+
+
+// 分组查询
+s.Student_ID, COUNT(sc.course_ID) AS CourseCount
+student s JOIN s_course sc ON s.Student_ID = sc.Student_ID
+
+s.Student_ID
+CourseCount >= 2
+
+//插入
+student (student_name,student_id, bithday, SGender, telephone)
+'Hakimi','123343','1992/05/20', 'Female', '87654321'
